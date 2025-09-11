@@ -1,24 +1,181 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tabela de Produtos</title>
+
+  <style>
+    .hidden {
+      display: none
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: Arial, sans-serif;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 12px 15px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #4CAF50;
+      color: white;
+      font-weight: bold;
+      text-transform: uppercase;
+      font-size: 14px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    td {
+      border-bottom: 1px solid #ddd;
+    }
+
+    #cadastro {
+      width: 350px;
+      margin: 50px auto;
+      padding: 20px;
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      font-family: Arial, sans-serif;
+    }
+
+    #cadastro h1 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    #cadastro input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    #cadastro .buttons {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    #cadastro button {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 14px;
+      transition: background 0.3s;
+    }
+
+    #cadastro button.salvar {
+      background: #4CAF50;
+      color: white;
+    }
+
+    #cadastro button.cancelar {
+      background: #f44336;
+      color: white;
+    }
+  </style>
 </head>
+
 <body>
 
+  <div id="corpo">
+    <button onclick="sumir()">Cadastrar produto</button>
+    <table id="tabelaProdutos">
+      <thead>
+        <tr>
+          <th>Produto</th>
+          <th>Preço</th>
+          <th>Quantidade</th>
+          <th>Valor total</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
 
-<table border="1">
-    <tbody><tr>
-        <th>Produto</th>
-        <th>Preço</th>
-        <th>Quantidade</th>
-        <th>Valor Total</th>
-    </tr>
-    </tbody><tbody id="corpo"><tr>        
-    </tr></tbody>
-   
-</table>
-     <button onclick="cadastrar()">Cadastrar Produto</button>
+  <div id="cadastro" class="hidden">
+    <h1>Cadastro de Produto</h1>
+    Produtos: <input type="text" id="campo1"><br><br>
+    Preço: <input type="text" id="campo2"><br><br>
+    Quantidade: <input type="text" id="campo3"><br><br>
+
+    <div class="buttons">
+      <button class="cancelar" onclick="aparecer()">Cancelar</button>
+      <button class="salvar" onclick="salvar()">Salvar</button>
+    </div>
+  </div>
+
+  <script>
+    let nomes = []
+    let precos = []
+    let quantidades = []
+    let totais = []
+
+    function sumir() {
+      document.getElementById("corpo").classList.add('hidden')
+      document.getElementById("cadastro").classList.remove('hidden')
+    }
+
+    function aparecer() {
+      document.getElementById("corpo").classList.remove('hidden')
+      document.getElementById("cadastro").classList.add('hidden')
+    }
+
+    function salvar() {
+      let nome = document.getElementById('campo1').value
+      let preco = parseFloat(document.getElementById('campo2').value)
+      let quantidade = parseInt(document.getElementById('campo3').value)
+
+
+      let total = preco * quantidade
+
+      nomes.push(nome)
+      precos.push(preco)
+      quantidades.push(quantidade)
+      totais.push(total)
+
+      
+      aparecer()
+      mostrarTabela()
+    }
+
+    function mostrarTabela() {
+
+
+      for (let i = 0; i < nomes.length; i++) {
+        const linha = document.createElement("tr")
+        linha.innerHTML = `
+          <td>${nomes[i]}</td>
+          <td>R$ ${precos[i]}</td>
+          <td>${quantidades[i]}</td>
+          <td>R$ ${totais[i]}</td>
+        `
+        tbody.appendChild(linha)
+      }
+    }
+  </script>
+
 </body>
 </html>
