@@ -10,7 +10,95 @@
     .hidden {
       display: none
     }
-    
+    /* Corpo da página */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  margin: 0;
+  padding: 20px;
+}
+
+/* Container principal */
+#corpo, #cadastro {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Botões */
+button {
+  cursor: pointer;
+  padding: 8px 16px;
+  margin: 5px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007BFF;
+  color: white;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Botão cancelar diferente */
+button.cancelar {
+  background-color: #dc3545;
+}
+
+button.cancelar:hover {
+  background-color: #a71d2a;
+}
+
+/* Tabela */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  padding: 12px 15px;
+  text-align: left;
+}
+
+thead {
+  background-color: #007BFF;
+  color: white;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tbody tr:hover {
+  background-color: #e6f0ff;
+}
+
+/* Inputs do formulário */
+input[type="text"] {
+  padding: 8px;
+  width: 95%;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+/* Título do cadastro */
+#cadastro h1 {
+  text-align: center;
+  color: #007BFF;
+}
+
+/* Botões do formulário centralizados */
+.buttons {
+  text-align: center;
+}
 
   </style>
 </head>
