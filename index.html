@@ -10,90 +10,8 @@
     .hidden {
       display: none
     }
+    
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-family: Arial, sans-serif;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-      border-radius: 8px;
-      overflow: hidden;
-    }
-
-    th, td {
-      padding: 12px 15px;
-      text-align: center;
-    }
-
-    th {
-      background-color: #4CAF50;
-      color: white;
-      font-weight: bold;
-      text-transform: uppercase;
-      font-size: 14px;
-    }
-
-    tr:nth-child(even) {
-      background-color: #f9f9f9;
-    }
-
-    tr:hover {
-      background-color: #f1f1f1;
-    }
-
-    td {
-      border-bottom: 1px solid #ddd;
-    }
-
-    #cadastro {
-      width: 350px;
-      margin: 50px auto;
-      padding: 20px;
-      background: #ffffff;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      font-family: Arial, sans-serif;
-    }
-
-    #cadastro h1 {
-      text-align: center;
-      color: #333;
-      margin-bottom: 20px;
-    }
-
-    #cadastro input[type="text"] {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 15px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 14px;
-    }
-
-    #cadastro .buttons {
-      display: flex;
-      justify-content: space-between;
-    }
-
-    #cadastro button {
-      padding: 10px 15px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: bold;
-      font-size: 14px;
-      transition: background 0.3s;
-    }
-
-    #cadastro button.salvar {
-      background: #4CAF50;
-      color: white;
-    }
-
-    #cadastro button.cancelar {
-      background: #f44336;
-      color: white;
-    }
   </style>
 </head>
 
@@ -108,6 +26,7 @@
           <th>Preço</th>
           <th>Quantidade</th>
           <th>Valor total</th>
+          <th>Ação</th>
         </tr>
       </thead>
       <tbody>
@@ -144,7 +63,7 @@
     }
 
     function salvar() {
-      let nome = document.getElementById('campo1').value
+      let nome = (document.getElementById('campo1').value)
       let preco = parseFloat(document.getElementById('campo2').value)
       let quantidade = parseInt(document.getElementById('campo3').value)
 
@@ -156,13 +75,21 @@
       quantidades.push(quantidade)
       totais.push(total)
 
-      
       aparecer()
       mostrarTabela()
     }
-
+//nota: o numero é a quantidade de itens q vai apagar no array
+ function excluir(index) {
+  nomes.splice(index, 1)
+  precos.splice(index, 1)
+  quantidades.splice(index, 1)
+  totais.splice(index, 1)
+  mostrarTabela()
+}
+//função pra nao duplicar o item anterior da tabela e limpar para add o proximo item 
     function mostrarTabela() {
-
+      const tbody = document.getElementById('tabelaProdutos').getElementsByTagName('tbody')[0]
+      tbody.innerHTML = "" 
 
       for (let i = 0; i < nomes.length; i++) {
         const linha = document.createElement("tr")
@@ -171,6 +98,7 @@
           <td>R$ ${precos[i]}</td>
           <td>${quantidades[i]}</td>
           <td>R$ ${totais[i]}</td>
+         <td><button onclick="excluir(${i})">Excluir</button></td>
         `
         tbody.appendChild(linha)
       }
